@@ -37,7 +37,7 @@ script:
 
   # Swarm
   - docker swarm init
-  - docker stack deploy -c ./docker-stack.yml elk
+  - docker stack deploy -c ./docker-compose.yml elk
   - docker service scale elk_kibana=0 --detach=false
   - docker service scale elk_logstash=0 --detach=false
   - sleep 40

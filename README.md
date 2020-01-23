@@ -1,7 +1,7 @@
 # Elastic stack (ELK) on Docker
 
 [![Join the chat at https://gitter.im/deviantony/docker-elk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/deviantony/docker-elk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Elastic Stack version](https://img.shields.io/badge/ELK-7.5.1-blue.svg?style=flat)](https://github.com/deviantony/docker-elk/issues/462)
+[![Elastic Stack version](https://img.shields.io/badge/ELK-7.4.1-blue.svg?style=flat)](https://github.com/deviantony/docker-elk/issues/441)
 [![Build Status](https://api.travis-ci.org/deviantony/docker-elk.svg?branch=master)](https://travis-ci.org/deviantony/docker-elk)
 
 Run the latest version of the [Elastic stack][elk-stack] with Docker and Docker Compose.
@@ -99,7 +99,7 @@ exclusively. Make sure the repository is cloned in one of those locations or fol
 
 ### Bringing up the stack
 
-Clone this repository onto the Docker host that will run the stack, then start services locally using Docker Compose:
+Clone this repository, then start the stack using Docker Compose:
 
 ```console
 $ docker-compose up
@@ -213,7 +213,7 @@ Create an index pattern via the Kibana API:
 ```console
 $ curl -XPOST -D- 'http://localhost:5601/api/saved_objects/index-pattern' \
     -H 'Content-Type: application/json' \
-    -H 'kbn-version: 7.5.1' \
+    -H 'kbn-version: 7.4.1' \
     -u elastic:<your generated elastic password> \
     -d '{"attributes":{"title":"logstash-*","timeFieldName":"@timestamp"}}'
 ```
@@ -357,14 +357,14 @@ See the following Wiki pages:
 
 ### Swarm mode
 
-Experimental support for Docker [Swarm mode][swarm-mode] is provided in the form of a `docker-stack.yml` file, which can
+Experimental support for Docker [Swarm mode][swarm-mode] is provided in the form of a `docker-compose.yml` file, which can
 be deployed in an existing Swarm cluster using the following command:
 
 ```console
-$ docker stack deploy -c docker-stack.yml elk
+$ docker stack deploy -c docker-compose.yml elk
 ```
 
-If all components get deployed without any error, the following command will show 3 running services:
+If all components get deployed without any error, the following command will show 5 running services:
 
 ```console
 $ docker stack services elk

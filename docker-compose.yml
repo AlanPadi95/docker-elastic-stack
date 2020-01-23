@@ -1,75 +1,156 @@
-version: '3.2'
+version: '3.7'
 
 services:
+
   elasticsearch:
-    build:
-      context: elasticsearch/
-      args:
-        ELK_VERSION: $ELK_VERSION
-    volumes:
-      - type: bind
-        source: ./elasticsearch/config/elasticsearch.yml
-        target: /usr/share/elasticsearch/config/elasticsearch.yml
-        read_only: true
-      - type: volume
-        source: elasticsearch
-        target: /usr/share/elasticsearch/data
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VERSION:-7.5.2}
     ports:
       - "9200:9200"
       - "9300:9300"
+    configs:
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+      - source: elastic_logs_config
+        target: /usr/share/elasticsearch/config/log4j2.properties
     environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      ELASTIC_PASSWORD: changeme
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
       # Use single node discovery in order to disable production mode and avoid bootstrap checks
       # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-      discovery.type: single-node
+      - discovery.type=single-node
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+      - ./elasticsearch/logs:/usr/share/elasticsearch/logs
     networks:
       - elk
+    deploy:
+      mode: replicated
+      replicas: 1
 
   logstash:
-    build:
-      context: logstash/
-      args:
-        ELK_VERSION: $ELK_VERSION
-    volumes:
-      - type: bind
-        source: ./logstash/config/logstash.yml
-        target: /usr/share/logstash/config/logstash.yml
-        read_only: true
-      - type: bind
-        source: ./logstash/pipeline
-        target: /usr/share/logstash/pipeline
-        read_only: true
+    image: docker.elastic.co/logstash/logstash:${ELASTIC_VERSION:-7.5.2}
     ports:
       - "5000:5000"
       - "9600:9600"
+    configs:
+      - source: logstash_config
+        target: /usr/share/logstash/config/logstash.yml
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      - ELASTIC_USER=${ELASTIC_USER:-elastic}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
+      - LS_JAVA_OPTS=-Xmx256m -Xms256m
+    depends_on:
+      - elasticsearch  
     networks:
       - elk
-    depends_on:
-      - elasticsearch
+    deploy:
+      mode: replicated
+      replicas: 1
 
   kibana:
-    build:
-      context: kibana/
-      args:
-        ELK_VERSION: $ELK_VERSION
-    volumes:
-      - type: bind
-        source: ./kibana/config/kibana.yml
-        target: /usr/share/kibana/config/kibana.yml
-        read_only: true
+    image: docker.elastic.co/kibana/kibana:${ELASTIC_VERSION:-7.5.2}
+    environment:
+      - ELASTIC_USER=${ELASTIC_USER:-elastic}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
     ports:
       - "5601:5601"
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+    depends_on:
+      - elasticsearch  
     networks:
       - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+  
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:${ELASTIC_VERSION:-7.5.2}
+    user: root
+    environment:
+      - setup.kibana.host=kibana:5601
+      - output.elasticsearch.hosts=["elasticsearch:9200"]
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME-elastic}
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD-changeme}
+    configs:
+      - source: metricbeat_config
+        target: /usr/share/metricbeat/metricbeat.yml
+    command: -system.hostfs=/hostfs
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /proc:/hostfs/proc:ro
+      - /:/hostfs:ro
+      - ./metricbeat/dashboards:/usr/share/metricbeat/kibana/7/dashboard:ro
     depends_on:
       - elasticsearch
+      - kibana  
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:${ELASTIC_VERSION:-7.5.2}
+    # https://github.com/docker/swarmkit/issues/1951
+    # Need to override user so we can access the log files, and docker.sock
+    user: root
+    configs:
+      - source: filebeat_config
+        target: /usr/share/filebeat/filebeat.yml
+    volumes:
+      - filebeat:/usr/share/filebeat/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      # This is needed for filebeat to load container log path as specified in filebeat.yml
+      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+      # # This is needed for filebeat to load jenkins build log path as specified in filebeat.yml
+      # - /var/lib/docker/volumes/jenkins_home/_data/jobs/:/var/lib/docker/volumes/jenkins_home/_data/jobs/:ros
+      # This is needed for filebeat to load logs for system and auth modules
+      - /var/log/:/var/log/
+      # This is needed for filebeat to load logs for auditd module
+      # - /var/log/audit/:/var/log/audit/:ro
+      # This is needed for filebeat to load elasticsearch logs
+      - ./elasticsearch/logs:/var/log/elasticsearch:ro
+      - ./filebeat/dashboards:/usr/share/filebeat/kibana/7/dashboard:ro
+    environment:
+      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-elasticsearch:9200}
+      - KIBANA_HOST=${KIBANA_HOST:-kibana:5601}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
+    # disable strict permission checks
+    command: ["--strict.perms=false"]
+    depends_on:
+      - elasticsearch
+      - kibana  
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+
+configs:
+  elastic_config:
+    file: ./elasticsearch/config/elasticsearch.yml
+  elastic_logs_config:
+    file: ./elasticsearch/config/log4j2.properties
+  logstash_config:
+    file: ./logstash/config/logstash.yml
+  kibana_config:
+    file: ./kibana/config/kibana.yml
+  metricbeat_config:
+    file: ./metricbeat/config/metricbeat.yml
+  filebeat_config:
+    file: ./filebeat/config/filebeat.yml
+
+volumes:
+  elastic_data:
+    driver: local
+  filebeat:
 
 networks:
   elk:
-    driver: bridge
-
-volumes:
-  elasticsearch:
+    driver: overlay

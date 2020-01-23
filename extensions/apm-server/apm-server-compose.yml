@@ -5,7 +5,7 @@ services:
     build:
       context: extensions/apm-server/
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: ${ELASTIC_VERSION:-7.5.2}
     volumes:
       - ./extensions/apm-server/config/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
     ports:

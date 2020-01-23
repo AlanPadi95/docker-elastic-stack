@@ -1,0 +1,105 @@
+# https://github.com/elastic/beats/blob/master/filebeat/filebeat.reference.yml
+
+filebeat.modules:
+    - module: system
+      syslog:
+        enabled: true
+      auth:
+        enabled: true
+    - module: auditd
+      log:
+        # Does not look like Auditd is supported in Alpine linux: https://github.com/linuxkit/linuxkit/issues/52
+        enabled: false
+    - module: elasticsearch
+      server:
+        enabled: true
+        var.paths:
+            - /var/log/elasticsearch/*.log          # Plain text log
+            - /var/log/elasticsearch/*_server.json  # JSON logs
+      gc:
+        var.paths:
+            - /var/log/elasticsearch/gc.log.[0-9]*
+            - /var/log/elasticsearch/gc.log
+      audit:
+        var.paths:
+            - /var/log/elasticsearch/*_access.log  # Plain text logs
+            - /var/log/elasticsearch/*_audit.json  # JSON logs
+      slowlog:
+        var.paths:
+            - /var/log/elasticsearch/*_index_search_slowlog.log     # Plain text logs
+            - /var/log/elasticsearch/*_index_indexing_slowlog.log   # Plain text logs
+            - /var/log/elasticsearch/*_index_search_slowlog.json    # JSON logs
+            - /var/log/elasticsearch/*_index_indexing_slowlog.json  # JSON logs
+    - module: kibana
+        # All logs
+      log:
+        enabled: true
+        # Set custom paths for the log files. If left empty,
+        # Filebeat will choose the paths depending on your OS.
+        var.paths:
+          
+#------------------------------- Logstash Module -------------------------------
+    - module: logstash
+    # logs
+      log:
+        enabled: true
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+        var.paths:
+
+# Slow logs
+#slowlog:
+    #enabled: true
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    #var.paths:
+filebeat.inputs:
+    - type: docker
+      enabled: true
+      containers:
+        stream: all # can be all, stdout or stderr
+        ids:
+          - '*'
+      # exclude_lines: ["^\\s+[\\-`('.|_]"]  # drop asciiart lines
+      # multiline.pattern: "^\t|^[[:space:]]+(at|...)|^Caused by:"
+      # multiline.match: after
+    
+
+    #========================== Filebeat autodiscover ==============================
+    # See this URL on how to run Apache2 Filebeat module: # https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
+filebeat.autodiscover:
+      providers:
+        - type: docker
+          # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-autodiscover-hints.html
+          # This URL alos contains instructions on multi-line logs
+          hints.enabled: true
+    
+    #================================ Processors ===================================
+processors:
+    - add_cloud_metadata: ~
+    - add_docker_metadata: ~
+    - add_locale:
+        format: offset
+    - add_host_metadata:
+        netinfo.enabled: true
+    
+    #========================== Elasticsearch output ===============================
+output.elasticsearch:
+    hosts: ["${ELASTICSEARCH_HOST}"]
+    username: ${ELASTICSEARCH_USERNAME}
+    password: ${ELASTICSEARCH_PASSWORD}
+    
+    #============================== Dashboards =====================================
+setup.dashboards:
+    enabled: true
+    
+    #============================== Kibana =========================================
+setup.kibana:
+    host: "${KIBANA_HOST}"
+    username: ${ELASTICSEARCH_USERNAME}
+    password: ${ELASTICSEARCH_PASSWORD}
+    
+    #============================== Xpack Monitoring ===============================
+xpack.monitoring:
+    enabled: true
+    elasticsearch:

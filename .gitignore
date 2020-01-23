@@ -1,0 +1,4 @@
+.vs-code/*
+.DS_Store
+elasticsearch/logs/*
+logstash/old_pipelines/*
