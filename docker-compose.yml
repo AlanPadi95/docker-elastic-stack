@@ -104,7 +104,7 @@ services:
       - source: filebeat_config
         target: /usr/share/filebeat/filebeat.yml
     volumes:
-      - filebeat:/usr/share/filebeat/data
+      - filebeat_local:/usr/share/filebeat/data
       - /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
       - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
@@ -151,7 +151,8 @@ configs:
 volumes:
   elastic_data:
     driver: local
-  filebeat:
+  filebeat_data:
+    driver: local
 
 networks:
   elk:

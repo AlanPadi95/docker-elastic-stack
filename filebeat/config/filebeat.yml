@@ -46,13 +46,14 @@ filebeat.modules:
     # Set custom paths for the log files. If left empty,
     # Filebeat will choose the paths depending on your OS.
         var.paths:
-
-# Slow logs
-#slowlog:
-    #enabled: true
-    # Set custom paths for the log files. If left empty,
-    # Filebeat will choose the paths depending on your OS.
-    #var.paths:
+          - /var/log/logstash/*
+      # Slow logs
+      slowlog:
+        #enabled: true
+        # Set custom paths for the log files. If left empty,
+        # Filebeat will choose the paths depending on your OS.
+        var.paths:
+          - 
 filebeat.inputs:
     - type: docker
       enabled: true
@@ -85,9 +86,9 @@ processors:
     
     #========================== Elasticsearch output ===============================
 output.elasticsearch:
-    hosts: ["${ELASTICSEARCH_HOST}"]
-    username: ${ELASTICSEARCH_USERNAME}
-    password: ${ELASTICSEARCH_PASSWORD}
+    hosts: ["${ELASTICSEARCH_HOST:-elasticsearch:9600}"]
+    username: ${ELASTICSEARCH_USERNAME:-elastic}
+    password: ${ELASTICSEARCH_PASSWORD:-changeme}
     
     #============================== Dashboards =====================================
 setup.dashboards:
@@ -95,9 +96,9 @@ setup.dashboards:
     
     #============================== Kibana =========================================
 setup.kibana:
-    host: "${KIBANA_HOST}"
-    username: ${ELASTICSEARCH_USERNAME}
-    password: ${ELASTICSEARCH_PASSWORD}
+    host: "${KIBANA_HOST:-kibana:5601}"
+    username: ${ELASTICSEARCH_USERNAME:-elastic}
+    password: ${ELASTICSEARCH_PASSWORD:-changeme}
     
     #============================== Xpack Monitoring ===============================
 xpack.monitoring:
