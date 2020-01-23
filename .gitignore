@@ -1,4 +1,4 @@
 .vs-code/*
 .DS_Store
-elasticsearch/logs/*
+**/logs/*
 logstash/old_pipelines/*

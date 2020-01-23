@@ -37,6 +37,7 @@ services:
         target: /usr/share/logstash/config/logstash.yml
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./logstash/logs:/usr/share/logstash/logs:ro
     environment:
       - ELASTIC_USER=${ELASTIC_USER:-elastic}
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
@@ -115,6 +116,7 @@ services:
       # - /var/log/audit/:/var/log/audit/:ro
       # This is needed for filebeat to load elasticsearch logs
       - ./elasticsearch/logs:/var/log/elasticsearch:ro
+      - ./logstash/logs:/var/log/logstash:ro
       - ./filebeat/dashboards:/usr/share/filebeat/kibana/7/dashboard:ro
     environment:
       - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-elasticsearch:9200}
