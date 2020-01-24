@@ -8,13 +8,19 @@ filebeat.modules:
         enabled: true
       auth:
         enabled: true
+        var.paths:
+          # Centos7
+          - /var/log/secure*
 
 #------------------------------- Audit Module -------------------------------
 
     - module: auditd
       log:
         # Does not look like Auditd is supported in Alpine linux: https://github.com/linuxkit/linuxkit/issues/52
-        enabled: false
+        enabled: true
+        var.paths:
+          # Centos 7
+          - /var/log/audit/audit.log*
 
 #------------------------------- Elasticsearch Module -------------------------------
 
