@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VERSION:-7.5.1}
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VERSION:-7.5.0}
     user: root
     ports:
       - "9200:9200"
@@ -29,7 +29,7 @@ services:
       replicas: 1
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:${ELASTIC_VERSION:-7.5.1}
+    image: docker.elastic.co/logstash/logstash:${ELASTIC_VERSION:-7.5.0}
     user: root
     ports:
       - "5000:5000"
@@ -55,7 +55,7 @@ services:
       replicas: 1
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:${ELASTIC_VERSION:-7.5.1}
+    image: docker.elastic.co/kibana/kibana:${ELASTIC_VERSION:-7.5.0}
     environment:
       - ELASTIC_USER=${ELASTIC_USER:-elastic}
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
@@ -73,7 +73,7 @@ services:
       replicas: 1
   
   metricbeat:
-    image: docker.elastic.co/beats/metricbeat:${ELASTIC_VERSION:-7.5.1}
+    image: docker.elastic.co/beats/metricbeat:${ELASTIC_VERSION:-7.5.0}
     user: root
     environment:
       - setup.kibana.host=kibana:5601
@@ -100,7 +100,7 @@ services:
       replicas: 1
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:${ELASTIC_VERSION:-7.5.1}
+    image: docker.elastic.co/beats/filebeat:${ELASTIC_VERSION:-7.5.0}
     # https://github.com/docker/swarmkit/issues/1951
     # Need to override user so we can access the log files, and docker.sock
     user: root
