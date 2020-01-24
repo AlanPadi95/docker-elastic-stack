@@ -13,7 +13,7 @@ services:
       - source: elastic_logs_config
         target: /usr/share/elasticsearch/config/log4j2.properties
     environment:
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - ES_JAVA_OPTS=-Xms500m -Xmx500m
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
       # Use single node discovery in order to disable production mode and avoid bootstrap checks
       # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
@@ -35,6 +35,8 @@ services:
     configs:
       - source: logstash_config
         target: /usr/share/logstash/config/logstash.yml
+      - source: logstash_logs_config
+        target: /usr/share/logstash/config/log4j2.properties
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
       - ./logstash/logs:/usr/share/logstash/logs:ro
@@ -104,7 +106,7 @@ services:
       - source: filebeat_config
         target: /usr/share/filebeat/filebeat.yml
     volumes:
-      - filebeat_local:/usr/share/filebeat/data
+      - filebeat_data:/usr/share/filebeat/data
       - /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
       - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
@@ -141,6 +143,8 @@ configs:
     file: ./elasticsearch/config/log4j2.properties
   logstash_config:
     file: ./logstash/config/logstash.yml
+  logstash_logs_config:
+    file: ./logstash/config/log4j2.properties
   kibana_config:
     file: ./kibana/config/kibana.yml
   metricbeat_config:

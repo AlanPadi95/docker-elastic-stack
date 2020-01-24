@@ -1,15 +1,23 @@
 # https://github.com/elastic/beats/blob/master/filebeat/filebeat.reference.yml
 
 filebeat.modules:
+
+#------------------------------- System Module -------------------------------
     - module: system
       syslog:
         enabled: true
       auth:
         enabled: true
+
+#------------------------------- Audit Module -------------------------------
+
     - module: auditd
       log:
         # Does not look like Auditd is supported in Alpine linux: https://github.com/linuxkit/linuxkit/issues/52
         enabled: false
+
+#------------------------------- Elasticsearch Module -------------------------------
+
     - module: elasticsearch
       server:
         enabled: true
@@ -30,6 +38,9 @@ filebeat.modules:
             - /var/log/elasticsearch/*_index_indexing_slowlog.log   # Plain text logs
             - /var/log/elasticsearch/*_index_search_slowlog.json    # JSON logs
             - /var/log/elasticsearch/*_index_indexing_slowlog.json  # JSON logs
+
+#------------------------------- Kibana Module -------------------------------
+
     - module: kibana
         # All logs
       log:
@@ -53,7 +64,8 @@ filebeat.modules:
         # Set custom paths for the log files. If left empty,
         # Filebeat will choose the paths depending on your OS.
         var.paths:
-          - 
+
+#========================== Filebeat inputs ==============================
 filebeat.inputs:
     - type: docker
       enabled: true
@@ -64,9 +76,8 @@ filebeat.inputs:
       # exclude_lines: ["^\\s+[\\-`('.|_]"]  # drop asciiart lines
       # multiline.pattern: "^\t|^[[:space:]]+(at|...)|^Caused by:"
       # multiline.match: after
-    
 
-    #========================== Filebeat autodiscover ==============================
+#========================== Filebeat autodiscover ==============================
     # See this URL on how to run Apache2 Filebeat module: # https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
 filebeat.autodiscover:
       providers:
@@ -75,7 +86,7 @@ filebeat.autodiscover:
           # This URL alos contains instructions on multi-line logs
           hints.enabled: true
     
-    #================================ Processors ===================================
+#================================ Processors ===================================
 processors:
     - add_cloud_metadata: ~
     - add_docker_metadata: ~
@@ -84,23 +95,23 @@ processors:
     - add_host_metadata:
         netinfo.enabled: true
     
-    #========================== Elasticsearch output ===============================
+#========================== Elasticsearch output ===============================
 output.elasticsearch:
     hosts: ["${ELASTICSEARCH_HOST:-elasticsearch:9600}"]
     username: ${ELASTICSEARCH_USERNAME:-elastic}
     password: ${ELASTICSEARCH_PASSWORD:-changeme}
     
-    #============================== Dashboards =====================================
+#============================== Dashboards =====================================
 setup.dashboards:
     enabled: true
     
-    #============================== Kibana =========================================
+#============================== Kibana =========================================
 setup.kibana:
     host: "${KIBANA_HOST:-kibana:5601}"
     username: ${ELASTICSEARCH_USERNAME:-elastic}
     password: ${ELASTICSEARCH_PASSWORD:-changeme}
     
-    #============================== Xpack Monitoring ===============================
+#============================== Xpack Monitoring ===============================
 xpack.monitoring:
     enabled: true
     elasticsearch:
