@@ -42,7 +42,7 @@ services:
         target: /usr/share/logstash/config/log4j2.properties
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
-      - ./logstash/logs:/usr/share/logstash/logs:ro
+      - ./logstash/logs:/usr/share/logstash/logs
     environment:
       - ELASTIC_USER=${ELASTIC_USER:-elastic}
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
@@ -116,12 +116,12 @@ services:
       # # This is needed for filebeat to load jenkins build log path as specified in filebeat.yml
       # - /var/lib/docker/volumes/jenkins_home/_data/jobs/:/var/lib/docker/volumes/jenkins_home/_data/jobs/:ros
       # This is needed for filebeat to load logs for system and auth modules
-      - /var/log/:/var/log/:ro
+      - /var/log/:/var/log/
       # This is needed for filebeat to load logs for auditd module
       # - /var/log/audit/:/var/log/audit/:ro
       # This is needed for filebeat to load elasticsearch logs
-      - ./elasticsearch/logs:/var/log/elasticsearch:ro
-      - ./logstash/logs:/var/log/logstash:ro
+      - ./elasticsearch/logs:/var/log/elasticsearch
+      - ./logstash/logs:/var/log/logstash
       - ./filebeat/dashboards:/usr/share/filebeat/kibana/7/dashboard:ro
     environment:
       - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-elasticsearch:9200}
@@ -129,7 +129,7 @@ services:
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
     # disable strict permission checks
-    command: ["--strict.perms=false"]
+    command: "--strict.perms=false"
     depends_on:
       - elasticsearch
       - kibana  

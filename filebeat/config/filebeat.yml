@@ -8,10 +8,10 @@ filebeat.modules:
         enabled: true
       auth:
         enabled: true
-        var.paths:
-          # Centos7
-          - /var/log/secure-([12]\d{3}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01]))
-          - /var/log/secure.log
+        # var.paths:
+        #   # Centos7
+        #   - /var/log/secure-([12]\d{3}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01]))
+        #   - /var/log/secure.log
 
 #------------------------------- Audit Module -------------------------------
 
@@ -19,11 +19,10 @@ filebeat.modules:
       log:
         # Does not look like Auditd is supported in Alpine linux: https://github.com/linuxkit/linuxkit/issues/52
         enabled: true
-        var.paths:
-          # Centos 7
-          - /var/log/audit/audit.log
-          - /var/log/audit/audit.log.[0-9]*
-          
+        # var.paths:
+        #   # Centos 7
+        #   - /var/log/audit/audit.log
+        #   - /var/log/audit/audit.log.[0-9]*
 #------------------------------- Elasticsearch Module -------------------------------
 
     - module: elasticsearch
@@ -111,7 +110,10 @@ output.elasticsearch:
     
 #============================== Dashboards =====================================
 setup.dashboards:
-    enabled: true
+  enabled: true
+  always_kibana: true #Only talk to Kibana, which is important for the retry
+  retry.enabled: true #Retry in case Kibana is not up yet
+  retry.interval: 10s
     
 #============================== Kibana =========================================
 setup.kibana:
