@@ -14,7 +14,7 @@ services:
       - source: elastic_logs_config
         target: /usr/share/elasticsearch/config/log4j2.properties
     environment:
-      - ES_JAVA_OPTS=-Xms500m -Xmx500m
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
       - TAKE_FILE_OWNERSHIP=true 
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
       # Use single node discovery in order to disable production mode and avoid bootstrap checks
