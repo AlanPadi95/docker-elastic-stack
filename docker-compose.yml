@@ -157,9 +157,9 @@ configs:
 
 volumes:
   elastic_data:
-    driver: local
+    file: ./elasticsearch/data
   filebeat_data:
-    driver: local
+    file: ./filebeat/data
 
 networks:
   elk:
