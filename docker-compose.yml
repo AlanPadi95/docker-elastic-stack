@@ -21,7 +21,7 @@ services:
       # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
       - discovery.type=single-node
     volumes:
-      - elastic_data:/usr/share/elasticsearch/data
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
       - ./elasticsearch/logs:/usr/share/elasticsearch/logs
     networks:
       - elk
@@ -109,7 +109,7 @@ services:
       - source: filebeat_config
         target: /usr/share/filebeat/filebeat.yml
     volumes:
-      - filebeat_data:/usr/share/filebeat/data
+      - ./filebeat/data:/usr/share/filebeat/data
       - /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
       - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
@@ -154,12 +154,6 @@ configs:
     file: ./metricbeat/config/metricbeat.yml
   filebeat_config:
     file: ./filebeat/config/filebeat.yml
-
-volumes:
-  elastic_data:
-    file: ./elasticsearch/data
-  filebeat_data:
-    file: ./filebeat/data
 
 networks:
   elk:
