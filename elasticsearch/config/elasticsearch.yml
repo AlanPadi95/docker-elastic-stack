@@ -11,3 +11,14 @@ network.host: 0.0.0.0
 xpack.license.self_generated.type: trial
 xpack.security.enabled: true
 xpack.monitoring.collection.enabled: true
+# xpack.notification.email.account:
+#     exchange_account:
+#         profile: outlook
+#         email_defaults:
+#             from: <email address of service account> 
+#         smtp:
+#             auth: true
+#             starttls.enable: true
+#             host: <your exchange server>
+#             port: 587
+#             user: <email address of service account>
