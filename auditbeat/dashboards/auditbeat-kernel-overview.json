@@ -1,0 +1,86 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{}"
+                }, 
+                "title": "Event Actions [Auditbeat Auditd] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"metrics\", \"params\": {\"bar_color_rules\": [{\"id\": \"5bfc71a0-c1bd-11e7-938f-ab0645b6c431\"}], \"gauge_color_rules\": [{\"id\": \"5d20a650-c1bd-11e7-938f-ab0645b6c431\"}], \"background_color_rules\": [{\"id\": \"58c95a20-c1bd-11e7-938f-ab0645b6c431\"}], \"time_field\": \"@timestamp\", \"index_pattern\": \"auditbeat-*\", \"gauge_inner_width\": 10, \"series\": [{\"line_width\": 1, \"terms_field\": \"event.action\", \"point_size\": 1, \"color\": \"#68BC00\", \"label\": \"Actions\", \"metrics\": [{\"type\": \"count\", \"id\": \"6b9fb2d0-c1bc-11e7-938f-ab0645b6c431\"}], \"seperate_axis\": 0, \"split_mode\": \"terms\", \"chart_type\": \"line\", \"stacked\": \"none\", \"axis_position\": \"right\", \"formatter\": \"number\", \"id\": \"61ca57f1-469d-11e7-af02-69e470af7417\", \"fill\": 0.5}], \"axis_formatter\": \"number\", \"interval\": \"auto\", \"filter\": \"event.module:auditd\", \"legend_position\": \"left\", \"show_legend\": 1, \"show_grid\": 1, \"gauge_style\": \"half\", \"axis_position\": \"left\", \"gauge_width\": 10, \"type\": \"timeseries\", \"id\": \"61ca57f0-469d-11e7-af02-69e470af7417\"}, \"aggs\": [], \"title\": \"Event Actions [Auditbeat Auditd] ECS\"}"
+            }, 
+            "id": "97680df0-c1c0-11e7-8995-936807a28b16-ecs", 
+            "type": "visualization", 
+            "updated_at": "2018-01-16T22:11:01.438Z", 
+            "version": 3
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "savedSearchId": "0f10c430-c1c3-11e7-8995-936807a28b16-ecs", 
+                "title": "Event Categories [Auditbeat Auditd] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"pie\", \"params\": {\"legendPosition\": \"right\", \"type\": \"pie\", \"isDonut\": true, \"addTooltip\": true, \"addLegend\": true}, \"aggs\": [{\"params\": {}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"field\": \"event.category\", \"customLabel\": \"Category\", \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}, {\"params\": {\"orderBy\": \"1\", \"field\": \"event.action\", \"customLabel\": \"Action\", \"order\": \"desc\", \"size\": 20}, \"type\": \"terms\", \"enabled\": true, \"id\": \"3\", \"schema\": \"segment\"}], \"title\": \"Event Categories [Auditbeat Auditd] ECS\"}"
+            }, 
+            "id": "08679220-c25a-11e7-8692-232bd1143e8a-ecs", 
+            "type": "visualization", 
+            "updated_at": "2018-01-16T22:54:10.330Z", 
+            "version": 4
+        }, 
+        {
+            "attributes": {
+                "columns": [
+                    "agent.hostname", 
+                    "auditd.summary.actor.primary", 
+                    "auditd.summary.actor.secondary", 
+                    "event.action", 
+                    "auditd.summary.object.type", 
+                    "auditd.summary.object.primary", 
+                    "auditd.summary.object.secondary", 
+                    "auditd.summary.how", 
+                    "auditd.result"
+                ], 
+                "description": "", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.module\": {\"query\": \"auditd\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"auditd\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"auditd\", \"type\": \"phrase\"}, \"key\": \"event.module\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"version\": true, \"highlightAll\": true, \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "sort": [
+                    "@timestamp", 
+                    "desc"
+                ], 
+                "title": "Audit Event Table [Auditbeat Auditd] ECS", 
+                "version": 1
+            }, 
+            "id": "0f10c430-c1c3-11e7-8995-936807a28b16-ecs", 
+            "type": "search", 
+            "updated_at": "2018-01-16T22:51:24.572Z", 
+            "version": 4
+        }, 
+        {
+            "attributes": {
+                "description": "Summary of Linux kernel audit events.", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"version\": true, \"highlightAll\": true}"
+                }, 
+                "optionsJSON": "{\"darkTheme\": false, \"useMargins\": false}", 
+                "panelsJSON": "[{\"gridData\": {\"i\": \"1\", \"h\": 3, \"y\": 0, \"w\": 7, \"x\": 0}, \"type\": \"visualization\", \"version\": \"6.2.4\", \"panelIndex\": \"1\", \"id\": \"97680df0-c1c0-11e7-8995-936807a28b16-ecs\"}, {\"gridData\": {\"i\": \"4\", \"h\": 3, \"y\": 0, \"w\": 5, \"x\": 7}, \"type\": \"visualization\", \"version\": \"6.2.4\", \"panelIndex\": \"4\", \"id\": \"08679220-c25a-11e7-8692-232bd1143e8a-ecs\"}, {\"gridData\": {\"i\": \"5\", \"h\": 5, \"y\": 3, \"w\": 12, \"x\": 0}, \"type\": \"search\", \"version\": \"6.2.4\", \"panelIndex\": \"5\", \"id\": \"0f10c430-c1c3-11e7-8995-936807a28b16-ecs\"}]", 
+                "timeRestore": false, 
+                "title": "[Auditbeat Auditd] Overview ECS", 
+                "version": 1
+            }, 
+            "id": "c0ac2c00-c1c0-11e7-8995-936807a28b16-ecs", 
+            "type": "dashboard", 
+            "updated_at": "2018-01-16T22:55:17.775Z", 
+            "version": 5
+        }
+    ], 
+    "version": "6.2.4"
+}

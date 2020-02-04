@@ -1,0 +1,143 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.module\": {\"query\": \"system\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"system\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"system\", \"type\": \"phrase\"}, \"key\": \"event.module\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Host Count [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"metric\", \"params\": {\"type\": \"metric\", \"metric\": {\"style\": {\"bgFill\": \"#000\", \"bgColor\": false, \"fontSize\": 60, \"subText\": \"\", \"labelColor\": false}, \"colorSchema\": \"Green to Red\", \"invertColors\": false, \"labels\": {\"show\": true}, \"useRanges\": false, \"percentageMode\": false, \"colorsRange\": [{\"to\": 10000, \"from\": 0}], \"metricColorMode\": \"None\"}, \"addTooltip\": true, \"addLegend\": false}, \"aggs\": [{\"params\": {\"field\": \"host.id\", \"customLabel\": \"Hosts\"}, \"type\": \"cardinality\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}], \"title\": \"Host Count [Auditbeat System] ECS\"}"
+            }, 
+            "id": "cf8aa0a0-18ca-11e9-9094-c50574723088-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-03T20:37:18.796Z", 
+            "version": 22
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"host\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"host\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"host\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "OS Distribution [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"pie\", \"params\": {\"isDonut\": true, \"addTooltip\": true, \"labels\": {\"values\": true, \"last_level\": true, \"truncate\": 100, \"show\": false}, \"legendPosition\": \"right\", \"addLegend\": true, \"type\": \"pie\"}, \"aggs\": [{\"params\": {\"field\": \"system.audit.host.id\"}, \"type\": \"cardinality\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"customLabel\": \"OS\", \"missingBucketLabel\": \"Missing\", \"field\": \"system.audit.host.os.name\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"missingBucketLabel\": \"Missing\", \"field\": \"system.audit.host.os.version\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"3\", \"schema\": \"segment\"}], \"title\": \"OS Distribution [Auditbeat System] ECS\"}"
+            }, 
+            "id": "9dd991a0-18cb-11e9-9094-c50574723088-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-01-21T11:37:35.796Z", 
+            "version": 24
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"host\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"host\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"host\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Average Uptime [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"metric\", \"params\": {\"type\": \"metric\", \"metric\": {\"style\": {\"bgFill\": \"#000\", \"bgColor\": false, \"fontSize\": 60, \"subText\": \"\", \"labelColor\": false}, \"colorSchema\": \"Green to Red\", \"invertColors\": false, \"labels\": {\"show\": true}, \"useRanges\": false, \"percentageMode\": false, \"colorsRange\": [{\"to\": 10000, \"from\": 0}], \"metricColorMode\": \"None\"}, \"addTooltip\": true, \"addLegend\": false}, \"aggs\": [{\"params\": {\"field\": \"system.audit.host.uptime\", \"customLabel\": \"Average Uptime in days\"}, \"type\": \"avg\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}], \"title\": \"Average Uptime [Auditbeat System] ECS\"}"
+            }, 
+            "id": "4d0485f0-18da-11e9-9094-c50574723088-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-01-21T11:57:55.023Z", 
+            "version": 23
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"host\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"host\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"host\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Host Documents [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"histogram\", \"params\": {\"seriesParams\": [{\"showCircles\": true, \"show\": \"true\", \"data\": {\"id\": \"1\", \"label\": \"Host States\"}, \"mode\": \"stacked\", \"drawLinesBetweenPoints\": true, \"valueAxis\": \"ValueAxis-1\", \"type\": \"histogram\"}], \"type\": \"histogram\", \"categoryAxes\": [{\"style\": {}, \"scale\": {\"type\": \"linear\"}, \"show\": true, \"title\": {}, \"labels\": {\"truncate\": 100, \"show\": true}, \"position\": \"bottom\", \"type\": \"category\", \"id\": \"CategoryAxis-1\"}], \"legendPosition\": \"right\", \"addTimeMarker\": false, \"addLegend\": true, \"grid\": {\"style\": {\"color\": \"#eee\"}, \"categoryLines\": false}, \"times\": [], \"addTooltip\": true, \"valueAxes\": [{\"style\": {}, \"scale\": {\"type\": \"linear\", \"mode\": \"normal\"}, \"name\": \"LeftAxis-1\", \"show\": true, \"title\": {\"text\": \"Host States\"}, \"labels\": {\"filter\": false, \"rotate\": 0, \"truncate\": 100, \"show\": true}, \"position\": \"left\", \"type\": \"value\", \"id\": \"ValueAxis-1\"}]}, \"aggs\": [{\"params\": {\"customLabel\": \"Host States\"}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"extended_bounds\": {}, \"field\": \"@timestamp\", \"interval\": \"auto\", \"time_zone\": \"Europe/London\", \"useNormalizedEsInterval\": true, \"drop_partials\": false, \"min_doc_count\": 1, \"customInterval\": \"2h\"}, \"type\": \"date_histogram\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}], \"title\": \"Host Documents [Auditbeat System] ECS\"}"
+            }, 
+            "id": "eea92ad0-18d7-11e9-9094-c50574723088-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T09:26:47.877Z", 
+            "version": 22
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"host\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"host\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"host\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Host List [Auditbeat System] ECS", 
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"columnIndex\": 1, \"direction\": \"asc\"}}}}", 
+                "version": 1, 
+                "visState": "{\"type\": \"table\", \"params\": {\"sort\": {\"columnIndex\": null, \"direction\": null}, \"perPage\": 10, \"showPartialRows\": false, \"showMetricsAtAllLevels\": false, \"totalFunc\": \"sum\", \"showTotal\": false}, \"aggs\": [{\"params\": {\"orderBy\": \"_key\", \"missingBucket\": false, \"customLabel\": \"Hostname\", \"missingBucketLabel\": \"Missing\", \"field\": \"system.audit.host.hostname\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"bucket\"}, {\"params\": {\"sortField\": \"@timestamp\", \"customLabel\": \"Uptime (days)\", \"field\": \"system.audit.host.uptime\", \"sortOrder\": \"desc\", \"aggregate\": \"max\", \"size\": 1}, \"type\": \"top_hits\", \"enabled\": true, \"id\": \"5\", \"schema\": \"metric\"}, {\"params\": {\"sortField\": \"@timestamp\", \"customLabel\": \"OS\", \"field\": \"system.audit.host.os.name\", \"sortOrder\": \"desc\", \"aggregate\": \"concat\", \"size\": 1}, \"type\": \"top_hits\", \"enabled\": true, \"id\": \"3\", \"schema\": \"metric\"}, {\"params\": {\"sortField\": \"@timestamp\", \"customLabel\": \"Version\", \"field\": \"system.audit.host.os.version\", \"sortOrder\": \"desc\", \"aggregate\": \"concat\", \"size\": 1}, \"type\": \"top_hits\", \"enabled\": true, \"id\": \"4\", \"schema\": \"metric\"}, {\"params\": {\"sortField\": \"@timestamp\", \"customLabel\": \"Host ID\", \"field\": \"system.audit.host.id\", \"sortOrder\": \"desc\", \"aggregate\": \"concat\", \"size\": 1}, \"type\": \"top_hits\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"sortField\": \"@timestamp\", \"customLabel\": \"Status\", \"field\": \"message\", \"sortOrder\": \"desc\", \"aggregate\": \"concat\", \"size\": 1}, \"type\": \"top_hits\", \"enabled\": true, \"id\": \"6\", \"schema\": \"metric\"}], \"title\": \"Host List [Auditbeat System] ECS\"}"
+            }, 
+            "id": "91962a30-1901-11e9-9094-c50574723088-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-01-21T11:58:22.519Z", 
+            "version": 25
+        }, 
+        {
+            "attributes": {
+                "columns": [
+                    "system.audit.host.hostname", 
+                    "event.action", 
+                    "message"
+                ], 
+                "description": "", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"host\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"dfce2b60-18c7-11e9-9094-c50574723088\", \"value\": \"host\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"host\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"version\": true, \"highlightAll\": true, \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "sort": [
+                    "@timestamp", 
+                    "desc"
+                ], 
+                "title": "Host Events [Auditbeat System] ECS", 
+                "version": 1
+            }, 
+            "id": "abe78cd0-18ca-11e9-9094-c50574723088-ecs", 
+            "type": "search", 
+            "updated_at": "2019-02-04T09:31:20.533Z", 
+            "version": 6
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Dashboard Links [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"markdown\", \"params\": {\"openLinksInNewTab\": false, \"markdown\": \"**Dashboards**: [System Overview](#/dashboard/2be46cb0-27f2-11e9-89af-fd12d59dac90-ecs) | [Hosts](#/dashboard/dfe62590-18da-11e9-9094-c50574723088-ecs) | [Logins](#/dashboard/2a17f200-285e-11e9-805f-43bf57dfa519-ecs) | [Users](#/dashboard/ae96a660-2864-11e9-97cb-474beda9f119-ecs) | [Processes](#/dashboard/4c68f110-2863-11e9-97cb-474beda9f119-ecs) | [Sockets](#/dashboard/957a3ef0-2867-11e9-9d21-0be348776e6c-ecs) | [Packages](#/dashboard/137c52f0-286a-11e9-9d21-0be348776e6c-ecs)\", \"fontSize\": 12}, \"aggs\": [], \"title\": \"Dashboard Links [Auditbeat System] ECS\"}"
+            }, 
+            "id": "4ccc5b50-27f6-11e9-89af-fd12d59dac90-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T11:37:25.234Z", 
+            "version": 3
+        }, 
+        {
+            "attributes": {
+                "description": "System Hosts", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "optionsJSON": "{\"useMargins\": true, \"darkTheme\": false, \"hidePanelTitles\": false}", 
+                "panelsJSON": "[{\"gridData\": {\"i\": \"1\", \"h\": 10, \"y\": 4, \"w\": 15, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"1\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"cf8aa0a0-18ca-11e9-9094-c50574723088-ecs\"}, {\"gridData\": {\"i\": \"2\", \"h\": 10, \"y\": 4, \"w\": 17, \"x\": 31}, \"embeddableConfig\": {}, \"panelIndex\": \"2\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"9dd991a0-18cb-11e9-9094-c50574723088-ecs\"}, {\"gridData\": {\"i\": \"4\", \"h\": 10, \"y\": 4, \"w\": 16, \"x\": 15}, \"embeddableConfig\": {}, \"panelIndex\": \"4\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"4d0485f0-18da-11e9-9094-c50574723088-ecs\"}, {\"gridData\": {\"i\": \"5\", \"h\": 7, \"y\": 14, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"5\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"eea92ad0-18d7-11e9-9094-c50574723088-ecs\"}, {\"gridData\": {\"i\": \"6\", \"h\": 12, \"y\": 21, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"6\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"91962a30-1901-11e9-9094-c50574723088-ecs\"}, {\"gridData\": {\"i\": \"7\", \"h\": 16, \"y\": 33, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"7\", \"version\": \"7.0.0\", \"type\": \"search\", \"id\": \"abe78cd0-18ca-11e9-9094-c50574723088-ecs\"}, {\"gridData\": {\"i\": \"8\", \"h\": 4, \"y\": 0, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"8\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"4ccc5b50-27f6-11e9-89af-fd12d59dac90-ecs\"}]", 
+                "timeRestore": false, 
+                "title": "[Auditbeat System] Host Dashboard ECS", 
+                "version": 1
+            }, 
+            "id": "dfe62590-18da-11e9-9094-c50574723088-ecs", 
+            "type": "dashboard", 
+            "updated_at": "2019-02-04T11:25:58.146Z", 
+            "version": 28
+        }
+    ], 
+    "version": "7.0.0"
+}

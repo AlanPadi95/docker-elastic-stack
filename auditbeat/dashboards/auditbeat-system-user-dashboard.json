@@ -1,0 +1,160 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"user\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"user\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"user\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "User Count [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"metric\", \"params\": {\"type\": \"metric\", \"metric\": {\"style\": {\"bgFill\": \"#000\", \"bgColor\": false, \"fontSize\": 60, \"subText\": \"\", \"labelColor\": false}, \"colorSchema\": \"Green to Red\", \"invertColors\": false, \"labels\": {\"show\": true}, \"useRanges\": false, \"percentageMode\": false, \"colorsRange\": [{\"to\": 10000, \"from\": 0}], \"metricColorMode\": \"None\"}, \"addTooltip\": true, \"addLegend\": false}, \"aggs\": [{\"params\": {\"field\": \"user.entity_id\", \"customLabel\": \"Users\"}, \"type\": \"cardinality\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}], \"title\": \"User Count [Auditbeat System] ECS\"}"
+            }, 
+            "id": "e9225120-27f2-11e9-89af-fd12d59dac90-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-03T20:35:48.640Z", 
+            "version": 2
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"user\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"user\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"user\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}, {\"query\": {\"match\": {\"event.action\": {\"query\": \"existing_user\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"existing_user\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"existing_user\", \"type\": \"phrase\"}, \"key\": \"event.action\", \"negate\": true, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "User Changes [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"metric\", \"params\": {\"type\": \"metric\", \"metric\": {\"style\": {\"bgFill\": \"#000\", \"bgColor\": false, \"fontSize\": 60, \"subText\": \"\", \"labelColor\": false}, \"colorSchema\": \"Green to Red\", \"invertColors\": false, \"labels\": {\"show\": true}, \"useRanges\": false, \"percentageMode\": false, \"colorsRange\": [{\"to\": 10000, \"from\": 0}], \"metricColorMode\": \"None\"}, \"addTooltip\": true, \"addLegend\": false}, \"aggs\": [{\"params\": {\"customLabel\": \"User Changes\"}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}], \"title\": \"User Changes [Auditbeat System] ECS\"}"
+            }, 
+            "id": "00fa0d20-27fc-11e9-89af-fd12d59dac90-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-03T21:38:11.314Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"user\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"user\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"user\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}, {\"query\": {\"match\": {\"event.action\": {\"query\": \"existing_user\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"existing_user\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"existing_user\", \"type\": \"phrase\"}, \"key\": \"event.action\", \"negate\": true, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "User Change Actions [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"pie\", \"params\": {\"isDonut\": true, \"addTooltip\": true, \"labels\": {\"values\": true, \"last_level\": true, \"truncate\": 100, \"show\": false}, \"legendPosition\": \"right\", \"addLegend\": true, \"type\": \"pie\"}, \"aggs\": [{\"params\": {}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"missingBucketLabel\": \"Missing\", \"field\": \"event.action\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}], \"title\": \"User Change Actions [Auditbeat System] ECS\"}"
+            }, 
+            "id": "dc514de0-2863-11e9-97cb-474beda9f119-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T10:01:37.470Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"user\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"user\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"user\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Password Types [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"pie\", \"params\": {\"isDonut\": true, \"addTooltip\": true, \"labels\": {\"values\": true, \"last_level\": true, \"truncate\": 100, \"show\": false}, \"legendPosition\": \"right\", \"addLegend\": true, \"type\": \"pie\"}, \"aggs\": [{\"params\": {}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"missingBucketLabel\": \"Missing\", \"field\": \"system.audit.user.password.type\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}], \"title\": \"Password Types [Auditbeat System] ECS\"}"
+            }, 
+            "id": "0bf8b4c0-2864-11e9-97cb-474beda9f119-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T10:02:57.420Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"user\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"user\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"user\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "User Documents Histogram [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"histogram\", \"params\": {\"seriesParams\": [{\"showCircles\": true, \"show\": \"true\", \"data\": {\"id\": \"1\", \"label\": \"Count\"}, \"mode\": \"stacked\", \"drawLinesBetweenPoints\": true, \"valueAxis\": \"ValueAxis-1\", \"type\": \"histogram\"}], \"type\": \"histogram\", \"categoryAxes\": [{\"style\": {}, \"scale\": {\"type\": \"linear\"}, \"show\": true, \"title\": {}, \"labels\": {\"truncate\": 100, \"show\": true}, \"position\": \"bottom\", \"type\": \"category\", \"id\": \"CategoryAxis-1\"}], \"legendPosition\": \"right\", \"addTimeMarker\": false, \"addLegend\": true, \"grid\": {\"style\": {\"color\": \"#eee\"}, \"categoryLines\": false}, \"times\": [], \"addTooltip\": true, \"valueAxes\": [{\"style\": {}, \"scale\": {\"type\": \"linear\", \"mode\": \"normal\"}, \"name\": \"LeftAxis-1\", \"show\": true, \"title\": {\"text\": \"Count\"}, \"labels\": {\"filter\": false, \"rotate\": 0, \"truncate\": 100, \"show\": true}, \"position\": \"left\", \"type\": \"value\", \"id\": \"ValueAxis-1\"}]}, \"aggs\": [{\"params\": {}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"extended_bounds\": {}, \"field\": \"@timestamp\", \"interval\": \"auto\", \"time_zone\": \"Europe/London\", \"useNormalizedEsInterval\": true, \"drop_partials\": false, \"min_doc_count\": 1, \"customInterval\": \"2h\"}, \"type\": \"date_histogram\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}], \"title\": \"User Documents Histogram [Auditbeat System] ECS\"}"
+            }, 
+            "id": "30f4eff0-2864-11e9-97cb-474beda9f119-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T10:03:59.471Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "columns": [
+                    "host.hostname", 
+                    "system.audit.user.name", 
+                    "system.audit.user.password.type", 
+                    "message"
+                ], 
+                "description": "", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"user\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"user\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"user\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"version\": true, \"highlightAll\": true, \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "sort": [
+                    "@timestamp", 
+                    "desc"
+                ], 
+                "title": "User Documents [Auditbeat System] ECS", 
+                "version": 1
+            }, 
+            "id": "658a3db0-2864-11e9-97cb-474beda9f119-ecs", 
+            "type": "search", 
+            "updated_at": "2019-02-04T10:05:27.691Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"user\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"user\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"user\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "User OS Distribution [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"pie\", \"params\": {\"isDonut\": true, \"addTooltip\": true, \"labels\": {\"values\": true, \"last_level\": true, \"truncate\": 100, \"show\": false}, \"legendPosition\": \"right\", \"addLegend\": true, \"type\": \"pie\"}, \"aggs\": [{\"params\": {\"field\": \"host.id\"}, \"type\": \"cardinality\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"customLabel\": \"OS\", \"missingBucketLabel\": \"Missing\", \"field\": \"host.os.name\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"missingBucketLabel\": \"Missing\", \"field\": \"host.os.version\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"3\", \"schema\": \"segment\"}], \"title\": \"User OS Distribution [Auditbeat System] ECS\"}"
+            }, 
+            "id": "7f480de0-2864-11e9-97cb-474beda9f119-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T10:06:10.878Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Dashboard Links [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"markdown\", \"params\": {\"openLinksInNewTab\": false, \"markdown\": \"**Dashboards**: [System Overview](#/dashboard/2be46cb0-27f2-11e9-89af-fd12d59dac90-ecs) | [Hosts](#/dashboard/dfe62590-18da-11e9-9094-c50574723088-ecs) | [Logins](#/dashboard/2a17f200-285e-11e9-805f-43bf57dfa519-ecs) | [Users](#/dashboard/ae96a660-2864-11e9-97cb-474beda9f119-ecs) | [Processes](#/dashboard/4c68f110-2863-11e9-97cb-474beda9f119-ecs) | [Sockets](#/dashboard/957a3ef0-2867-11e9-9d21-0be348776e6c-ecs) | [Packages](#/dashboard/137c52f0-286a-11e9-9d21-0be348776e6c-ecs)\", \"fontSize\": 12}, \"aggs\": [], \"title\": \"Dashboard Links [Auditbeat System] ECS\"}"
+            }, 
+            "id": "4ccc5b50-27f6-11e9-89af-fd12d59dac90-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T11:37:25.234Z", 
+            "version": 3
+        }, 
+        {
+            "attributes": {
+                "description": "System Users", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "optionsJSON": "{\"useMargins\": true, \"darkTheme\": false, \"hidePanelTitles\": false}", 
+                "panelsJSON": "[{\"gridData\": {\"i\": \"1\", \"h\": 10, \"y\": 4, \"w\": 8, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"1\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"e9225120-27f2-11e9-89af-fd12d59dac90-ecs\"}, {\"gridData\": {\"i\": \"2\", \"h\": 10, \"y\": 4, \"w\": 8, \"x\": 8}, \"embeddableConfig\": {}, \"panelIndex\": \"2\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"00fa0d20-27fc-11e9-89af-fd12d59dac90-ecs\"}, {\"gridData\": {\"i\": \"3\", \"h\": 10, \"y\": 4, \"w\": 11, \"x\": 26}, \"embeddableConfig\": {}, \"panelIndex\": \"3\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"dc514de0-2863-11e9-97cb-474beda9f119-ecs\"}, {\"gridData\": {\"i\": \"4\", \"h\": 10, \"y\": 4, \"w\": 11, \"x\": 37}, \"embeddableConfig\": {}, \"panelIndex\": \"4\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"0bf8b4c0-2864-11e9-97cb-474beda9f119-ecs\"}, {\"gridData\": {\"i\": \"5\", \"h\": 9, \"y\": 14, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"5\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"30f4eff0-2864-11e9-97cb-474beda9f119-ecs\"}, {\"gridData\": {\"i\": \"6\", \"h\": 26, \"y\": 23, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"6\", \"version\": \"7.0.0\", \"type\": \"search\", \"id\": \"658a3db0-2864-11e9-97cb-474beda9f119-ecs\"}, {\"gridData\": {\"i\": \"7\", \"h\": 10, \"y\": 4, \"w\": 10, \"x\": 16}, \"embeddableConfig\": {}, \"panelIndex\": \"7\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"7f480de0-2864-11e9-97cb-474beda9f119-ecs\"}, {\"gridData\": {\"i\": \"8\", \"h\": 4, \"y\": 0, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"8\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"4ccc5b50-27f6-11e9-89af-fd12d59dac90-ecs\"}]", 
+                "timeRestore": false, 
+                "title": "[Auditbeat System] User Dashboard ECS", 
+                "version": 1
+            }, 
+            "id": "ae96a660-2864-11e9-97cb-474beda9f119-ecs", 
+            "type": "dashboard", 
+            "updated_at": "2019-02-04T11:02:23.820Z", 
+            "version": 3
+        }
+    ], 
+    "version": "7.0.0"
+}

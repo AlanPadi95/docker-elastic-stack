@@ -1,0 +1,160 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"login\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"login\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"login\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Login Count [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"metric\", \"params\": {\"type\": \"metric\", \"metric\": {\"style\": {\"bgFill\": \"#000\", \"bgColor\": false, \"fontSize\": 60, \"subText\": \"\", \"labelColor\": false}, \"colorSchema\": \"Green to Red\", \"invertColors\": false, \"labels\": {\"show\": true}, \"useRanges\": false, \"percentageMode\": false, \"colorsRange\": [{\"to\": 10000, \"from\": 0}], \"metricColorMode\": \"None\"}, \"addTooltip\": true, \"addLegend\": false}, \"aggs\": [{\"params\": {\"customLabel\": \"Login Events\"}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}], \"title\": \"Login Count [Auditbeat System] ECS\"}"
+            }, 
+            "id": "8d63c420-27f4-11e9-89af-fd12d59dac90-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-03T20:44:50.914Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"login\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"login\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"login\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Login Actions [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"pie\", \"params\": {\"isDonut\": true, \"addTooltip\": true, \"labels\": {\"values\": true, \"last_level\": true, \"truncate\": 100, \"show\": false}, \"legendPosition\": \"right\", \"addLegend\": true, \"type\": \"pie\"}, \"aggs\": [{\"params\": {}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"missingBucketLabel\": \"Missing\", \"field\": \"event.action\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}], \"title\": \"Login Actions [Auditbeat System] ECS\"}"
+            }, 
+            "id": "593df9b0-27f7-11e9-89af-fd12d59dac90-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-03T21:04:51.914Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"login\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"login\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"login\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}, {\"query\": {\"match\": {\"event.outcome\": {\"query\": \"success\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"success\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"success\", \"type\": \"phrase\"}, \"key\": \"event.outcome\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Login Success Table [Auditbeat System] ECS", 
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"columnIndex\": null, \"direction\": null}}}}", 
+                "version": 1, 
+                "visState": "{\"type\": \"table\", \"params\": {\"sort\": {\"columnIndex\": null, \"direction\": null}, \"perPage\": 8, \"showPartialRows\": false, \"showMetricsAtAllLevels\": false, \"totalFunc\": \"sum\", \"showTotal\": false}, \"aggs\": [{\"params\": {\"customLabel\": \"Successful Logins\"}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"customLabel\": \"User\", \"missingBucketLabel\": \"Missing\", \"field\": \"user.name\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"bucket\"}], \"title\": \"Login Success Table [Auditbeat System] ECS\"}"
+            }, 
+            "id": "5eb5f250-285e-11e9-805f-43bf57dfa519-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T09:22:44.444Z", 
+            "version": 2
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"login\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"login\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"login\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}, {\"query\": {\"match\": {\"event.outcome\": {\"query\": \"failure\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"failure\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"failure\", \"type\": \"phrase\"}, \"key\": \"event.outcome\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Login Failures Table [Auditbeat System] ECS", 
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"columnIndex\": null, \"direction\": null}}}}", 
+                "version": 1, 
+                "visState": "{\"type\": \"table\", \"params\": {\"sort\": {\"columnIndex\": null, \"direction\": null}, \"perPage\": 8, \"showPartialRows\": false, \"showMetricsAtAllLevels\": false, \"totalFunc\": \"sum\", \"showTotal\": false}, \"aggs\": [{\"params\": {\"customLabel\": \"Failed Logins\"}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"customLabel\": \"User\", \"missingBucketLabel\": \"Missing\", \"field\": \"user.name\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"bucket\"}], \"title\": \"Login Failures Table [Auditbeat System] ECS\"}"
+            }, 
+            "id": "a1951650-285e-11e9-805f-43bf57dfa519-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T09:24:11.445Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"login\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"login\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"login\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Login Event Histogram [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"histogram\", \"params\": {\"seriesParams\": [{\"showCircles\": true, \"show\": \"true\", \"data\": {\"id\": \"1\", \"label\": \"Count\"}, \"mode\": \"stacked\", \"drawLinesBetweenPoints\": true, \"valueAxis\": \"ValueAxis-1\", \"type\": \"histogram\"}], \"type\": \"histogram\", \"categoryAxes\": [{\"style\": {}, \"scale\": {\"type\": \"linear\"}, \"show\": true, \"title\": {}, \"labels\": {\"truncate\": 100, \"show\": true}, \"position\": \"bottom\", \"type\": \"category\", \"id\": \"CategoryAxis-1\"}], \"legendPosition\": \"right\", \"addTimeMarker\": false, \"addLegend\": true, \"grid\": {\"style\": {\"color\": \"#eee\"}, \"categoryLines\": false}, \"times\": [], \"addTooltip\": true, \"valueAxes\": [{\"style\": {}, \"scale\": {\"type\": \"linear\", \"mode\": \"normal\"}, \"name\": \"LeftAxis-1\", \"show\": true, \"title\": {\"text\": \"Count\"}, \"labels\": {\"filter\": false, \"rotate\": 0, \"truncate\": 100, \"show\": true}, \"position\": \"left\", \"type\": \"value\", \"id\": \"ValueAxis-1\"}]}, \"aggs\": [{\"params\": {}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"extended_bounds\": {}, \"field\": \"@timestamp\", \"interval\": \"auto\", \"time_zone\": \"Europe/London\", \"useNormalizedEsInterval\": true, \"drop_partials\": false, \"min_doc_count\": 1, \"customInterval\": \"2h\"}, \"type\": \"date_histogram\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}], \"title\": \"Login Event Histogram [Auditbeat System] ECS\"}"
+            }, 
+            "id": "e4d25fe0-285e-11e9-805f-43bf57dfa519-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T09:26:04.254Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "columns": [
+                    "host.hostname", 
+                    "user.name", 
+                    "event.outcome", 
+                    "message"
+                ], 
+                "description": "", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"login\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"login\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"login\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"version\": true, \"highlightAll\": true, \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "sort": [
+                    "@timestamp", 
+                    "desc"
+                ], 
+                "title": "Login Events [Auditbeat System] ECS", 
+                "version": 1
+            }, 
+            "id": "2e04c720-285f-11e9-805f-43bf57dfa519-ecs", 
+            "type": "search", 
+            "updated_at": "2019-02-04T09:28:07.058Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.dataset\": {\"query\": \"login\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"login\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"login\", \"type\": \"phrase\"}, \"key\": \"event.dataset\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Login OS Distribution [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"pie\", \"params\": {\"isDonut\": true, \"addTooltip\": true, \"labels\": {\"values\": true, \"last_level\": true, \"truncate\": 100, \"show\": false}, \"legendPosition\": \"right\", \"addLegend\": true, \"type\": \"pie\"}, \"aggs\": [{\"params\": {\"field\": \"host.id\"}, \"type\": \"cardinality\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"customLabel\": \"OS\", \"missingBucketLabel\": \"Missing\", \"field\": \"host.os.name\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}, {\"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"missingBucketLabel\": \"Missing\", \"field\": \"host.os.version\", \"otherBucketLabel\": \"Other\", \"otherBucket\": false, \"order\": \"desc\", \"size\": 5}, \"type\": \"terms\", \"enabled\": true, \"id\": \"3\", \"schema\": \"segment\"}], \"title\": \"Login OS Distribution [Auditbeat System] ECS\"}"
+            }, 
+            "id": "e8eb58a0-2860-11e9-805f-43bf57dfa519-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T09:40:30.122Z", 
+            "version": 1
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Dashboard Links [Auditbeat System] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"markdown\", \"params\": {\"openLinksInNewTab\": false, \"markdown\": \"**Dashboards**: [System Overview](#/dashboard/2be46cb0-27f2-11e9-89af-fd12d59dac90-ecs) | [Hosts](#/dashboard/dfe62590-18da-11e9-9094-c50574723088-ecs) | [Logins](#/dashboard/2a17f200-285e-11e9-805f-43bf57dfa519-ecs) | [Users](#/dashboard/ae96a660-2864-11e9-97cb-474beda9f119-ecs) | [Processes](#/dashboard/4c68f110-2863-11e9-97cb-474beda9f119-ecs) | [Sockets](#/dashboard/957a3ef0-2867-11e9-9d21-0be348776e6c-ecs) | [Packages](#/dashboard/137c52f0-286a-11e9-9d21-0be348776e6c-ecs)\", \"fontSize\": 12}, \"aggs\": [], \"title\": \"Dashboard Links [Auditbeat System] ECS\"}"
+            }, 
+            "id": "4ccc5b50-27f6-11e9-89af-fd12d59dac90-ecs", 
+            "type": "visualization", 
+            "updated_at": "2019-02-04T11:37:25.234Z", 
+            "version": 3
+        }, 
+        {
+            "attributes": {
+                "description": "System Logins", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "optionsJSON": "{\"useMargins\": true, \"darkTheme\": false, \"hidePanelTitles\": false}", 
+                "panelsJSON": "[{\"gridData\": {\"i\": \"1\", \"h\": 10, \"y\": 4, \"w\": 8, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"1\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"8d63c420-27f4-11e9-89af-fd12d59dac90-ecs\"}, {\"gridData\": {\"i\": \"2\", \"h\": 10, \"y\": 4, \"w\": 10, \"x\": 8}, \"embeddableConfig\": {}, \"panelIndex\": \"2\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"593df9b0-27f7-11e9-89af-fd12d59dac90-ecs\"}, {\"gridData\": {\"i\": \"4\", \"h\": 10, \"y\": 4, \"w\": 10, \"x\": 28}, \"embeddableConfig\": {}, \"panelIndex\": \"4\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"5eb5f250-285e-11e9-805f-43bf57dfa519-ecs\"}, {\"gridData\": {\"i\": \"5\", \"h\": 10, \"y\": 4, \"w\": 10, \"x\": 38}, \"embeddableConfig\": {}, \"panelIndex\": \"5\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"a1951650-285e-11e9-805f-43bf57dfa519-ecs\"}, {\"gridData\": {\"i\": \"6\", \"h\": 9, \"y\": 14, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"6\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"e4d25fe0-285e-11e9-805f-43bf57dfa519-ecs\"}, {\"gridData\": {\"i\": \"7\", \"h\": 26, \"y\": 23, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"7\", \"version\": \"7.0.0\", \"type\": \"search\", \"id\": \"2e04c720-285f-11e9-805f-43bf57dfa519-ecs\"}, {\"gridData\": {\"i\": \"8\", \"h\": 10, \"y\": 4, \"w\": 10, \"x\": 18}, \"embeddableConfig\": {}, \"panelIndex\": \"8\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"e8eb58a0-2860-11e9-805f-43bf57dfa519-ecs\"}, {\"gridData\": {\"i\": \"9\", \"h\": 4, \"y\": 0, \"w\": 48, \"x\": 0}, \"embeddableConfig\": {}, \"panelIndex\": \"9\", \"version\": \"7.0.0\", \"type\": \"visualization\", \"id\": \"4ccc5b50-27f6-11e9-89af-fd12d59dac90-ecs\"}]", 
+                "timeRestore": false, 
+                "title": "[Auditbeat System] Login Dashboard ECS", 
+                "version": 1
+            }, 
+            "id": "2a17f200-285e-11e9-805f-43bf57dfa519-ecs", 
+            "type": "dashboard", 
+            "updated_at": "2019-02-04T11:38:50.007Z", 
+            "version": 6
+        }
+    ], 
+    "version": "7.0.0"
+}

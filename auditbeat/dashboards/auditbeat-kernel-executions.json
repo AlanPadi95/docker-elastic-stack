@@ -1,0 +1,99 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "Command executions", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "savedSearchId": "d382f5b0-c1c6-11e7-8995-936807a28b16-ecs", 
+                "title": "Error Codes [Auditbeat Auditd] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"pie\", \"params\": {\"legendPosition\": \"right\", \"type\": \"pie\", \"isDonut\": true, \"addTooltip\": true, \"addLegend\": true}, \"aggs\": [{\"params\": {}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"exclude\": \"0\", \"size\": 10, \"order\": \"desc\", \"field\": \"auditd.data.exit\"}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}], \"title\": \"Error Codes [Auditbeat Auditd] ECS\"}"
+            }, 
+            "id": "20a8e8d0-c1c8-11e7-8995-936807a28b16-ecs", 
+            "type": "visualization", 
+            "updated_at": "2018-01-16T22:10:23.921Z", 
+            "version": 4
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"index\": \"auditbeat-*\", \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "title": "Primary Username Tag Cloud [Auditbeat Auditd] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"tagcloud\", \"params\": {\"maxFontSize\": 45, \"minFontSize\": 18, \"orientation\": \"single\", \"scale\": \"linear\"}, \"aggs\": [{\"params\": {}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"field\": \"auditd.summary.actor.primary\", \"order\": \"desc\", \"size\": 10}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}], \"title\": \"Primary Username Tag Cloud [Auditbeat Auditd] ECS\"}"
+            }, 
+            "id": "f81a6de0-c1c1-11e7-8995-936807a28b16-ecs", 
+            "type": "visualization", 
+            "updated_at": "2018-01-16T22:12:18.730Z", 
+            "version": 3
+        }, 
+        {
+            "attributes": {
+                "description": "", 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "savedSearchId": "d382f5b0-c1c6-11e7-8995-936807a28b16-ecs", 
+                "title": "Exe Name Tag Cloud [Auditbeat Auditd] ECS", 
+                "uiStateJSON": "{}", 
+                "version": 1, 
+                "visState": "{\"type\": \"tagcloud\", \"params\": {\"maxFontSize\": 45, \"minFontSize\": 14, \"orientation\": \"single\", \"scale\": \"linear\"}, \"aggs\": [{\"params\": {}, \"type\": \"count\", \"enabled\": true, \"id\": \"1\", \"schema\": \"metric\"}, {\"params\": {\"orderBy\": \"1\", \"field\": \"process.executable\", \"order\": \"desc\", \"size\": 10}, \"type\": \"terms\", \"enabled\": true, \"id\": \"2\", \"schema\": \"segment\"}], \"title\": \"Exe Name Tag Cloud [Auditbeat Auditd] ECS\"}"
+            }, 
+            "id": "2efac370-c1ca-11e7-8995-936807a28b16-ecs", 
+            "type": "visualization", 
+            "updated_at": "2018-01-16T22:57:41.411Z", 
+            "version": 4
+        }, 
+        {
+            "attributes": {
+                "columns": [
+                    "agent.hostname", 
+                    "process.args", 
+                    "auditd.summary.actor.primary", 
+                    "auditd.summary.actor.secondary", 
+                    "process.executable"
+                ], 
+                "description": "", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [{\"query\": {\"match\": {\"event.module\": {\"query\": \"auditd\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"auditd\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"auditd\", \"type\": \"phrase\"}, \"key\": \"event.module\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}, {\"query\": {\"match\": {\"event.action\": {\"query\": \"executed\", \"type\": \"phrase\"}}}, \"meta\": {\"index\": \"auditbeat-*\", \"value\": \"executed\", \"disabled\": false, \"alias\": null, \"params\": {\"query\": \"executed\", \"type\": \"phrase\"}, \"key\": \"event.action\", \"negate\": false, \"type\": \"phrase\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"auditbeat-*\", \"version\": true, \"highlightAll\": true, \"query\": {\"query\": \"\", \"language\": \"kuery\"}}"
+                }, 
+                "sort": [
+                    "@timestamp", 
+                    "desc"
+                ], 
+                "title": "Process Executions [Auditbeat Auditd] ECS", 
+                "version": 1
+            }, 
+            "id": "d382f5b0-c1c6-11e7-8995-936807a28b16-ecs", 
+            "type": "search", 
+            "updated_at": "2018-01-16T22:26:35.050Z", 
+            "version": 5
+        }, 
+        {
+            "attributes": {
+                "description": "Overview of kernel executions", 
+                "hits": 0, 
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"version\": true, \"highlightAll\": true}"
+                }, 
+                "optionsJSON": "{\"darkTheme\": false, \"useMargins\": false}", 
+                "panelsJSON": "[{\"gridData\": {\"i\": \"1\", \"h\": 3, \"y\": 0, \"w\": 4, \"x\": 4}, \"type\": \"visualization\", \"version\": \"6.2.4\", \"panelIndex\": \"1\", \"id\": \"20a8e8d0-c1c8-11e7-8995-936807a28b16-ecs\"}, {\"gridData\": {\"i\": \"3\", \"h\": 3, \"y\": 0, \"w\": 4, \"x\": 8}, \"type\": \"visualization\", \"version\": \"6.2.4\", \"panelIndex\": \"3\", \"id\": \"f81a6de0-c1c1-11e7-8995-936807a28b16-ecs\"}, {\"gridData\": {\"i\": \"5\", \"h\": 3, \"y\": 0, \"w\": 4, \"x\": 0}, \"type\": \"visualization\", \"version\": \"6.2.4\", \"panelIndex\": \"5\", \"id\": \"2efac370-c1ca-11e7-8995-936807a28b16-ecs\"}, {\"gridData\": {\"i\": \"6\", \"h\": 5, \"y\": 3, \"w\": 12, \"x\": 0}, \"type\": \"search\", \"version\": \"6.2.4\", \"panelIndex\": \"6\", \"id\": \"d382f5b0-c1c6-11e7-8995-936807a28b16-ecs\"}]", 
+                "timeRestore": false, 
+                "title": "[Auditbeat Auditd] Executions ECS", 
+                "version": 1
+            }, 
+            "id": "7de391b0-c1ca-11e7-8995-936807a28b16-ecs", 
+            "type": "dashboard", 
+            "updated_at": "2018-01-16T22:58:11.243Z", 
+            "version": 5
+        }
+    ], 
+    "version": "6.2.4"
+}

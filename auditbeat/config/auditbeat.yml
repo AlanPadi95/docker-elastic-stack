@@ -1,0 +1,273 @@
+###################### Auditbeat Configuration Example #########################
+
+# This is an example configuration file highlighting only the most common
+# options. The auditbeat.reference.yml file from the same directory contains all
+# the supported options with more comments. You can use it as a reference.
+#
+# You can find the full configuration reference here:
+# https://www.elastic.co/guide/en/beats/auditbeat/index.html
+#============================  Config Reloading ================================
+
+# Config reloading allows to dynamically load modules. Each file which is
+# monitored must contain one or multiple modules as a list.
+auditbeat.config.modules:
+
+  # Glob pattern for configuration reloading
+  path: ${path.config}/modules.d/*.yml
+
+  # Period on which files under path should be checked for changes
+  reload.period: 10s
+
+  # Set to true to enable config reloading
+  reload.enabled: false
+
+  # Maximum amount of time to randomly delay the start of a dataset. Use 0 to
+  # disable startup delay.
+  auditbeat.max_start_delay: 10s
+
+#==========================  Modules configuration =============================
+auditbeat.modules:
+
+- module: file_integrity
+  paths:
+  - /bin
+  - /usr/bin
+  - /usr/local/bin
+  - /sbin
+  - /usr/sbin
+  - /usr/local/sbin
+
+    # List of regular expressions to filter out notifications for unwanted files.
+  # Wrap in single quotes to workaround YAML escaping rules. By default no files
+  # are ignored.
+  exclude_files:
+    - '\.DS_Store$'
+    - '\.swp$'
+  
+  # List of regular expressions used to explicitly include files. When configured,
+  # Auditbeat will ignore files unless they match a pattern.
+  #include_files:
+  #- '/\.ssh($|/)'
+
+  # Scan over the configured file paths at startup and send events for new or
+  # modified files since the last time Auditbeat was running.
+  scan_at_start: true
+
+  # Average scan rate. This throttles the amount of CPU and I/O that Auditbeat
+  # consumes at startup while scanning. Default is "50 MiB".
+  scan_rate_per_sec: 50 MiB
+
+  # Limit on the size of files that will be hashed. Default is "100 MiB".
+  # Limit on the size of files that will be hashed. Default is "100 MiB".
+  max_file_size: 100 MiB
+
+  # Hash types to compute when the file changes. Supported types are
+  # blake2b_256, blake2b_384, blake2b_512, md5, sha1, sha224, sha256, sha384,
+  # sha512, sha512_224, sha512_256, sha3_224, sha3_256, sha3_384, sha3_512, and xxh64.
+  # Default is sha1.
+  hash_types: [sha1]
+
+  # Detect changes to files included in subdirectories. Disabled by default.
+  recursive: false
+
+  # Set to true to publish fields with null values in events.
+  #keep_null: false
+  
+  # The system module collects security related information about a host.
+  # All datasets send both periodic state information (e.g. all currently
+  # running processes) and real-time changes (e.g. when a new process starts
+  # or stops).
+
+- module: system
+  datasets:
+    - host    # General host information, e.g. uptime, IPs
+    - package # Installed, updated, and removed packages
+    - process # Started and stopped processes
+
+  # How often datasets send state updates with the
+  # current state of the system (e.g. all currently
+  # running processes, all open sockets).
+  state.period: 12h
+
+  # How often datasets send state updates with the
+  # current state of the system (e.g. all currently
+  # running processes, all open sockets).
+  state.period: 12h
+
+  # The state.period can be overridden for any dataset.
+  # host.state.period: 12h
+  # package.state.period: 12h
+  # process.state.period: 12h
+
+  # Average file read rate for hashing of the process executable. Default is "50 MiB".
+  process.hash.scan_rate_per_sec: 50 MiB
+
+  # Limit on the size of the process executable that will be hashed. Default is "100 MiB".
+  process.hash.max_file_size: 100 MiB
+
+  # Hash types to compute of the process executable. Supported types are
+  # blake2b_256, blake2b_384, blake2b_512, md5, sha1, sha224, sha256, sha384,
+  # sha512, sha512_224, sha512_256, sha3_224, sha3_256, sha3_384, sha3_512, and xxh64.
+  # Default is sha1.
+  process.hash.hash_types: [sha1]
+
+#==================== Elasticsearch template setting ==========================
+setup.template.settings:
+  index.number_of_shards: 1
+  #index.codec: best_compression
+  #_source.enabled: false
+
+#================================ General =====================================
+
+# The name of the shipper that publishes the network data. It can be used to group
+# all the transactions sent by a single shipper in the web interface.
+#name:
+
+# The tags of the shipper are included in their own field with each
+# transaction published.
+#tags: ["service-X", "web-tier"]
+
+# Optional fields that you can specify to add additional information to the
+# output.
+#fields:
+#  env: staging
+
+
+#============================== Dashboards =====================================
+# These settings control loading the sample dashboards to the Kibana index. Loading
+# the dashboards is disabled by default and can be enabled either by setting the
+# options here or by using the `setup` command.
+setup.dashboards:
+  enabled: true
+  always_kibana: true #Only talk to Kibana, which is important for the retry
+  retry.enabled: true #Retry in case Kibana is not up yet
+  retry.interval: 10s
+
+# The URL from where to download the dashboards archive. By default this URL
+# has a value which is computed based on the Beat name and version. For released
+# versions, this URL points to the dashboard archive on the artifacts.elastic.co
+# website.
+#setup.dashboards.url:
+
+#============================== Kibana =====================================
+
+setup.kibana:
+  host: "${KIBANA_HOST:-kibana:5601}"
+
+  # Kibana Space ID
+  # ID of the Kibana Space into which the dashboards should be loaded. By default,
+  # the Default Space will be used.
+  #space.id:
+
+#============================= Elastic Cloud ==================================
+
+# These settings simplify using Auditbeat with the Elastic Cloud (https://cloud.elastic.co/).
+
+# The cloud.id setting overwrites the `output.elasticsearch.hosts` and
+# `setup.kibana.host` options.
+# You can find the `cloud.id` in the Elastic Cloud web UI.
+#cloud.id:
+
+# The cloud.auth setting overwrites the `output.elasticsearch.username` and
+# `output.elasticsearch.password` settings. The format is `<user>:<pass>`.
+#cloud.auth:
+
+#================================ Outputs =====================================
+
+# Configure what output to use when sending the data collected by the beat.
+
+#-------------------------- Elasticsearch output ------------------------------
+output.elasticsearch:
+  hosts: ["${ELASTICSEARCH_HOST:-elasticsearch:9600}"]
+  # protocol: https
+  username: ${ELASTICSEARCH_USERNAME:-elastic}
+  password: ${ELASTICSEARCH_PASSWORD:-changeme}
+
+#----------------------------- Logstash output --------------------------------
+#output.logstash:
+  # The Logstash hosts
+  #hosts: ["localhost:5044"]
+
+  # Optional SSL. By default is off.
+  # List of root certificates for HTTPS server verifications
+  #ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
+
+  # Certificate for SSL client authentication
+  #ssl.certificate: "/etc/pki/client/cert.pem"
+
+  # Client Certificate Key
+  #ssl.key: "/etc/pki/client/cert.key"
+
+#================================ Processors =====================================
+
+# Configure processors to enhance or manipulate events generated by the beat.
+
+processors:
+- add_cloud_metadata: ~
+#
+# The following example enriches each event with the machine's local time zone
+# offset from UTC.
+#
+- add_locale:
+   format: offset
+#
+# The following example enriches each event with docker metadata, it matches
+# given fields to an existing container id and adds info from that container:
+#
+- add_docker_metadata:
+   host: "unix:///var/run/docker.sock"
+   match_fields: ["system.process.cgroup.id"]
+   match_pids: ["process.pid", "process.ppid"]
+   match_source: true
+   match_source_index: 4
+   match_short_id: false
+   cleanup_timeout: 60
+   labels.dedot: false
+#    # To connect to Docker over TLS you must specify a client and CA certificate.
+#    #ssl:
+#    #  certificate_authority: "/etc/pki/root/ca.pem"
+#    #  certificate:           "/etc/pki/client/cert.pem"
+#    #  key:                   "/etc/pki/client/cert.key"
+
+- add_process_metadata:
+   match_pids: ["system.process.ppid"]
+   target: system.process.parent
+
+#================================ Logging =====================================
+
+# Sets log level. The default log level is info.
+# Available log levels are: error, warning, info, debug
+#logging.level: debug
+logging.to_files: true
+logging.files:
+# At debug level, you can selectively enable logging only for some components.
+# To enable all selectors use ["*"]. Examples of other selectors are "beat",
+# "publish", "service".
+#logging.selectors: ["*"]
+
+#============================== X-Pack Monitoring ===============================
+# auditbeat can export internal metrics to a central Elasticsearch monitoring
+# cluster.  This requires xpack monitoring to be enabled in Elasticsearch.  The
+# reporting is disabled by default.
+
+# Set to true to enable the monitoring reporter.
+#monitoring.enabled: false
+
+# Sets the UUID of the Elasticsearch cluster under which monitoring data for this
+# Auditbeat instance will appear in the Stack Monitoring UI. If output.elasticsearch
+# is enabled, the UUID is derived from the Elasticsearch cluster referenced by output.elasticsearch.
+#monitoring.cluster_uuid:
+
+# Uncomment to send the metrics to Elasticsearch. Most settings from the
+# Elasticsearch output are accepted here as well.
+# Note that the settings should point to your Elasticsearch *monitoring* cluster.
+# Any setting that is not set is automatically inherited from the Elasticsearch
+# output configuration, so if you have the Elasticsearch output configured such
+# that it is pointing to your Elasticsearch monitoring cluster, you can simply
+# uncomment the following line.
+#monitoring.elasticsearch:
+
+#================================= Migration ==================================
+
+# This allows to enable 6.7 migration aliases
+#migration.6_to_7.enabled: true

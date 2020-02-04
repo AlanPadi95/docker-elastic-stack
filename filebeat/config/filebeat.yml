@@ -114,8 +114,6 @@ setup.dashboards:
 #============================== Kibana =========================================
 setup.kibana:
     host: "${KIBANA_HOST:-kibana:5601}"
-    username: ${ELASTICSEARCH_USERNAME:-elastic}
-    password: ${ELASTICSEARCH_PASSWORD:-changeme}
     
 #============================== Xpack Monitoring ===============================
 xpack.monitoring:
