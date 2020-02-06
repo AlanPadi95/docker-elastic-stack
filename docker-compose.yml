@@ -139,32 +139,60 @@ services:
       mode: replicated
       replicas: 1
   
-  auditbeat:
-    image: docker.elastic.co/beats/auditbeat:${ELASTIC_VERSION:-7.5.2}
-    # https://github.com/docker/swarmkit/issues/1951
-    # Need to override user so we can access the log files, and docker.sock
+  ##################### AUDITBEAT INSIDE A CONTAINER IS UDER DEVELOPEMENT ####################
+  # auditbeat:
+  #   image: docker.elastic.co/beats/auditbeat:${ELASTIC_VERSION:-7.5.2}
+  #   # https://github.com/docker/swarmkit/issues/1951
+  #   # Need to override user so we can access the log files, and docker.sock
+  #   user: root
+  #   configs:
+  #     - source: auditbeat_config
+  #       target: /usr/share/auditbeat/auditbeat.yml
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     # This is needed for filebeat to load container log path as specified in filebeat.yml
+  #     - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+  #     - ./auditbeat/dashboards:/usr/share/auditbeat/kibana/7/dashboard:ro
+  #   environment:
+  #     - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-elasticsearch:9200}
+  #     - KIBANA_HOST=${KIBANA_HOST:-kibana:5601}
+  #     - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
+  #     - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
+  #   depends_on:
+  #     - elasticsearch
+  #     - kibana
+  #   networks:
+  #     - elk
+  #     - host
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+
+  heartbeat:
+    image: store/elastic/heartbeat:7.5.2
     user: root
-    configs:
-      - source: auditbeat_config
-        target: /usr/share/auditbeat/auditbeat.yml
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      # This is needed for filebeat to load container log path as specified in filebeat.yml
-      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
-      - ./auditbeat/dashboards:/usr/share/auditbeat/kibana/7/dashboard:ro
     environment:
       - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-elasticsearch:9200}
       - KIBANA_HOST=${KIBANA_HOST:-kibana:5601}
-      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
-      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME-elastic}
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD-changeme}
+      # Uncomment for hosts that use icmp protocol
+      # - ICMP_HOSTS=
+      - TCP_HOSTS=["${ELASTICSEARCH_HOST:-elasticsearch:9200}","${KIBANA_HOST:-kibana:5601}","logstash:9600"]
+      - HTTP_HOSTS=["http://${KIBANA_HOST:-kibana:5601}","http://logstash:9600"]
+    configs:
+      - source: heartbeat_config
+        target: /usr/share/heartbeat/heartbeat.yml
     depends_on:
       - elasticsearch
-      - kibana
+      - kibana  
     networks:
       - elk
     deploy:
       mode: replicated
       replicas: 1
+  
+
 configs:
   elastic_config:
     file: ./elasticsearch/config/elasticsearch.yml
@@ -180,13 +208,17 @@ configs:
     file: ./metricbeat/config/metricbeat.yml
   filebeat_config:
     file: ./filebeat/config/filebeat.yml
-  auditbeat_config:
-    file: ./auditbeat/config/auditbeat.yml
+  # auditbeat_config:
+  #   file: ./auditbeat/config/auditbeat.yml
+  heartbeat_config:
+    file: ./heartbeat/config/heartbeat.yml
+
 volumes:
   elastic_data:
     driver: local
   filebeat_data:
     driver: local
+
 
 networks:
   elk:
