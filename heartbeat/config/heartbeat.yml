@@ -22,70 +22,70 @@ heartbeat.config.monitors:
 
 # Configure monitors
 heartbeat.monitors:
-# - type: icmp # monitor type `icmp` (requires root) uses ICMP Echo Request to ping
-#              # configured hosts
+- type: icmp # monitor type `icmp` (requires root) uses ICMP Echo Request to ping
+             # configured hosts
 
-#   # Monitor name used for job name and document type.
-#   #name: icmp
+  # Monitor name used for job name and document type.
+  #name: icmp
 
-#   # Enable/Disable monitor
-#   #enabled: true
+  # Enable/Disable monitor
+  #enabled: true
 
-#   # Configure task schedule using cron-like syntax
-#   schedule: '*/5 * * * * * *' # exactly every 5 seconds like 10:00:00, 10:00:05, ...
+  # Configure task schedule using cron-like syntax
+  schedule: '*/5 * * * * * *' # exactly every 5 seconds like 10:00:00, 10:00:05, ...
 
-#   # List of hosts to ping
-#   hosts: ${ICMP_HOSTS}
+  # List of hosts to ping
+  hosts: ${ICMP_HOSTS}
 
-#   # Configure IP protocol types to ping on if hostnames are configured.
-#   # Ping all resolvable IPs if `mode` is `all`, or only one IP if `mode` is `any`.
-#   ipv4: true
-#   ipv6: true
-#   mode: any
+  # Configure IP protocol types to ping on if hostnames are configured.
+  # Ping all resolvable IPs if `mode` is `all`, or only one IP if `mode` is `any`.
+  ipv4: true
+  ipv6: true
+  mode: any
 
-#   # Total running time per ping test.
-#   timeout: 16s
+  # Total running time per ping test.
+  timeout: 16s
 
-#   # Waiting duration until another ICMP Echo Request is emitted.
-#   wait: 1s
+  # Waiting duration until another ICMP Echo Request is emitted.
+  wait: 1s
 
-#   # The tags of the monitors are included in their own field with each
-#   # transaction published. Tags make it easy to group servers by different
-#   # logical properties.
-#   #tags: ["service-X", "web-tier"]
+  # The tags of the monitors are included in their own field with each
+  # transaction published. Tags make it easy to group servers by different
+  # logical properties.
+  #tags: ["service-X", "web-tier"]
 
-#   # Optional fields that you can specify to add additional information to the
-#   # monitor output. Fields can be scalar values, arrays, dictionaries, or any nested
-#   # combination of these.
-#   #fields:
-#   #  env: staging
+  # Optional fields that you can specify to add additional information to the
+  # monitor output. Fields can be scalar values, arrays, dictionaries, or any nested
+  # combination of these.
+  #fields:
+  #  env: staging
 
-#   # If this option is set to true, the custom fields are stored as top-level
-#   # fields in the output document instead of being grouped under a fields
-#   # sub-dictionary. Default is false.
-#   #fields_under_root: false
+  # If this option is set to true, the custom fields are stored as top-level
+  # fields in the output document instead of being grouped under a fields
+  # sub-dictionary. Default is false.
+  #fields_under_root: false
 
-#   # NOTE: THIS FEATURE IS DEPRECATED AND WILL BE REMOVED IN A FUTURE RELEASE
-#   # Configure file json file to be watched for changes to the monitor:
-#   #watch.poll_file:
-#     # Path to check for updates.
-#     #path:
+  # NOTE: THIS FEATURE IS DEPRECATED AND WILL BE REMOVED IN A FUTURE RELEASE
+  # Configure file json file to be watched for changes to the monitor:
+  #watch.poll_file:
+    # Path to check for updates.
+    #path:
 
-#     # Interval between file file changed checks.
-#     #interval: 5s
+    # Interval between file file changed checks.
+    #interval: 5s
 
-#   # Set to true to publish fields with null values in events.
-#   #keep_null: false
+  # Set to true to publish fields with null values in events.
+  #keep_null: false
 
-# # Define a directory to load monitor definitions from. Definitions take the form
-# # of individual yaml files.
-# # heartbeat.config.monitors:
-#   # Directory + glob pattern to search for configuration files
-#   #path: /path/to/my/monitors.d/*.yml
-#   # If enabled, heartbeat will periodically check the config.monitors path for changes
-#   #reload.enabled: true
-#   # How often to check for changes
-#   #reload.period: 1s
+# Define a directory to load monitor definitions from. Definitions take the form
+# of individual yaml files.
+# heartbeat.config.monitors:
+  # Directory + glob pattern to search for configuration files
+  #path: /path/to/my/monitors.d/*.yml
+  # If enabled, heartbeat will periodically check the config.monitors path for changes
+  #reload.enabled: true
+  # How often to check for changes
+  #reload.period: 1s
 
 - type: tcp # monitor type `tcp`. Connect via TCP and optionally verify endpoint
             # by sending/receiving a custom payload
