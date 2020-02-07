@@ -176,7 +176,6 @@ services:
       - KIBANA_HOST=${KIBANA_HOST:-kibana:5601}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME-elastic}
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD-changeme}
-      # Uncomment for hosts that use icmp protocol
       - ICMP_HOSTS=["localhost"]
       - TCP_HOSTS=["${ELASTICSEARCH_HOST:-elasticsearch:9200}","${KIBANA_HOST:-kibana:5601}","logstash:9600"]
       - HTTP_HOSTS=["http://${KIBANA_HOST:-kibana:5601}","http://logstash:9600"]
