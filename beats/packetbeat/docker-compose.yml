@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+    packetbeat:
+        image: docker.elastic.co/beats/packetbeat:${ELASTIC_VERSION:-7.5.2}
+        user: root
+        configs:
+            - source: packetbeat_config
+              target: /usr/share/packetbeat/packetbeat.yml
+        volumes:
+            - packetbeat_data:/usr/share/packetbeat/data
+            - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-elasticsearch:9200}
+            - KIBANA_HOST=${KIBANA_HOST:-kibana:5601}
+            - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME-elastic}
+            - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD-changeme}
+        command: ["--strict.perms=false"]
+        depends_on:
+            - elasticsearch
+            - kibana  
+        networks:
+            - elk
+        cap_add:
+            - NET_RAW
+            - NET_ADMIN
+        deploy:
+            mode: replicated
+            replicas: 1
+
+configs:
+    packetbeat_config:
+        file: ./config/packetbeat.yml
+volumes:  
+    packetbeat_data:
+        driver: local
+
+networks:
+    elk:
+        driver: overlay

@@ -20,6 +20,12 @@ heartbeat.config.monitors:
   # How often to check for changes
   reload.period: 5s
 
+
+heartbeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
 # Configure monitors
 heartbeat.monitors:
 - type: icmp # monitor type `icmp` (requires root) uses ICMP Echo Request to ping
