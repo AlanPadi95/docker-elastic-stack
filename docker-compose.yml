@@ -118,7 +118,7 @@ services:
       # This is needed for filebeat to load logs for system and auth modules
       - /var/log/:/var/log/
       # This is needed for filebeat to load logs for auditd module
-      - /var/log/audit/:/var/log/audit/:ro
+      # - /var/log/audit/:/var/log/audit/:ro
       # This is needed for filebeat to load elasticsearch logs
       - ./elasticsearch/logs:/var/log/elasticsearch
       - ./logstash/logs:/var/log/logstash
@@ -139,8 +139,6 @@ services:
       mode: replicated
       replicas: 1
   
-  
-
   heartbeat:
     image: store/elastic/heartbeat:${ELASTIC_VERSION:-7.5.2}
     user: root

@@ -20,12 +20,6 @@ heartbeat.config.monitors:
   # How often to check for changes
   reload.period: 5s
 
-
-heartbeat.autodiscover:
-  providers:
-    - type: docker
-      hints.enabled: true
-
 # Configure monitors
 heartbeat.monitors:
 - type: icmp # monitor type `icmp` (requires root) uses ICMP Echo Request to ping
@@ -439,16 +433,16 @@ heartbeat.scheduler:
 # The following example enriches each event with docker metadata, it matches
 # given fields to an existing container id and adds info from that container:
 #
-#processors:
-#- add_docker_metadata:
-#    host: "unix:///var/run/docker.sock"
-#    match_fields: ["system.process.cgroup.id"]
-#    match_pids: ["process.pid", "process.ppid"]
-#    match_source: true
-#    match_source_index: 4
-#    match_short_id: false
-#    cleanup_timeout: 60
-#    labels.dedot: false
+processors:
+- add_docker_metadata:
+    host: "unix:///var/run/docker.sock"
+    match_fields: ["system.process.cgroup.id"]
+    match_pids: ["process.pid", "process.ppid"]
+    match_source: true
+    match_source_index: 4
+    match_short_id: false
+    cleanup_timeout: 60
+    labels.dedot: false
 #    # To connect to Docker over TLS you must specify a client and CA certificate.
 #    #ssl:
 #    #  certificate_authority: "/etc/pki/root/ca.pem"
@@ -464,17 +458,17 @@ heartbeat.scheduler:
 #
 # The following example enriches each event with host metadata.
 #
-#processors:
-#- add_host_metadata:
-#   netinfo.enabled: false
-#
-# The following example enriches each event with process metadata using
-# process IDs included in the event.
-#
-#processors:
-#- add_process_metadata:
-#    match_pids: ["system.process.ppid"]
-#    target: system.process.parent
+# #processors:
+#   - add_host_metadata:
+#     netinfo.enabled: true
+# #
+# # The following example enriches each event with process metadata using
+# # process IDs included in the event.
+# #
+# #processors:
+#   - add_process_metadata:
+#     match_pids: ["system.process.ppid"]
+#     target: system.process.parent
 #
 # The following example decodes fields containing JSON strings
 # and replaces the strings with valid JSON objects.

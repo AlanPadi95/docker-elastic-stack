@@ -9,7 +9,22 @@ network.host: 0.0.0.0
 ## see https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-xpack.html
 #
 xpack.license.self_generated.type: trial
-xpack.security.enabled: true
+xpack.security:
+        enabled: true
+    #   authc:
+    #     realms:
+    #       ldap:
+    #         ldap1:
+    #           order: 0
+    #           url: "ldaps://ldap.example.com:636"
+    #           user_dn_templates:
+    #             - "cn={0}, ou=users, o=marketing, dc=example, dc=com"
+    #             - "cn={0}, ou=users, o=engineering, dc=example, dc=com"
+    #           group_search:
+    #             base_dn: "dc=example,dc=com"
+    #           files:
+    #             role_mapping: "/mnt/elasticsearch/group_to_role_mapping.yml"
+    #           unmapped_groups_as_roles: false
 xpack.monitoring.collection.enabled: true
 # xpack.notification.email.account:
 #     exchange_account:
