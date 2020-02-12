@@ -8,13 +8,34 @@ packetbeat.flows:
 
 #========================== Transaction protocols =============================
 packetbeat.protocols:
+- type: icmp
+
+- type: amqp
+  ports: [5672]
+
+- type: dhcpv4
+  # Configure the DHCP for IPv4 ports.
+  ports: [67, 68]
+
+- type: dns
+  ports: [53]
+  include_authorities: true
+  include_additionals: true
+
 - type: http
-  ports: [80, 8080, 5000]
+  ports: [80, 8080, 8000, 5000, 8002]
   send_headers: true
   send_all_headers: true
 
 - type: tls
-  ports: [443]
+  ports:
+    - 443   # HTTPS
+    - 993   # IMAPS
+    - 995   # POP3S
+    - 5223  # XMPP over SSL
+    - 8443
+    - 8883  # Secure MQTT
+    - 9243  # Elasticsearch
   send_certificates: false
 
 #=========================== Monitored processes ==============================
@@ -46,7 +67,7 @@ processors:
 
 #========================== Elasticsearch output ===============================
 output.elasticsearch:
-  hosts: ["${ELASTICSEARCH_HOST}:9200"]
+  hosts: ["${ELASTICSEARCH_HOST}"]
   username: ${ELASTICSEARCH_USERNAME}
   password: ${ELASTICSEARCH_PASSWORD}
 
@@ -56,7 +77,7 @@ setup.dashboards:
 
 #============================== Kibana =========================================
 setup.kibana:
-  host: "${KIBANA_HOST}:80"
+  host: "${KIBANA_HOST}"
   username: ${ELASTICSEARCH_USERNAME}
   password: ${ELASTICSEARCH_PASSWORD}
 

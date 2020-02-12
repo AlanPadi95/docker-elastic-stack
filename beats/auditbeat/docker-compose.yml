@@ -6,11 +6,9 @@ services:
     image: docker.elastic.co/beats/auditbeat:${ELASTIC_VERSION:-7.5.2}
     # https://github.com/docker/swarmkit/issues/1951
     # Need to override user so we can access the log files, and docker.sock
-    user: root
-    configs:
-      - source: auditbeat_config
-        target: /usr/share/auditbeat/auditbeat.yml
+    user: root 
     volumes:
+      - ./config/auditbeat.yml:/usr/share/auditbeat/auditbeat.yml:ro
       - /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
       - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
@@ -20,19 +18,8 @@ services:
       - KIBANA_HOST=${KIBANA_HOST:-kibana:5601}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
-    depends_on:
-      - elasticsearch
-      - kibana
     networks:
       - elk
-      - host
-    deploy:
-      mode: replicated
-      replicas: 1
-
-configs:
-    auditbeat_config:
-        file: ./config/auditbeat.yml
 
 networks:
     elk:
